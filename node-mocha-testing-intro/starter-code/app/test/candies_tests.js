@@ -8,6 +8,7 @@ api           = supertest("http://localhost:3000");
 // });
 
 describe("Candies", function(){
+
   it("should return a 200 response", function(done){
     api.get("/candies")
     .set("Accept", "application/json")
@@ -22,20 +23,21 @@ describe("Candies", function(){
         expect(response.body).to.be.an('array');
         done()
       });
-    });
+  });
 
-    it("should return an object that have a field called 'name' ", function(done){
-    api
-      .get("/candies")
-      .set("Accept", "application/json")
-      .end(function(error, response){
-        expect(response.body[0]).to.have.property('name');
-        done()
+  it("should return an object that have a field called 'name' ", function(done){
+  api
+    .get("/candies")
+    .set("Accept", "application/json")
+    .end(function(error, response){
+      expect(response.body[0]).to.have.property('name');
+      done()
     });
   });
 });
 
 describe("POST /candies", function(){
+
   before(function(done){
    api
    .post("/candies")
@@ -45,8 +47,9 @@ describe("POST /candies", function(){
      "name": "Lollipop",
      "color": "Red"
    }).end(done)
- });
- it("should add a candy object to the collection candies and return it", function(done){
+  });
+
+  it("should add a candy object to the collection candies and return it", function(done){
   api.get("/candies")
   .set("Accept", "application/json")
   .end(function(error, response){
@@ -54,4 +57,5 @@ describe("POST /candies", function(){
     done()
     });
   });
+
 });
